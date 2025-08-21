@@ -67,7 +67,7 @@ export default function LoginPage() {
         alt="background"
         className="absolute inset-0 w-full h-full object-cover opacity-50"
       />
-      <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+      <div className="absolute inset-0 bg-white bg-opacity-30"></div>
 
       <div className="relative z-10 flex items-center justify-center w-full h-full">
         <div className="bg-gray-600 bg-opacity-60 p-10 rounded-lg w-[400px]">

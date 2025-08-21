@@ -1,0 +1,203 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id Int@id @default(autoincrement())
+  KhachHang KhachHang[]
+  NhanVien NhanVien[]
+}
+
+model KhachHang{
+  id Int@id @default(autoincrement())
+  hoTen String @db.VarChar(255)
+  tuoi Int
+  gmail String @db.VarChar(50)
+  sdt String @db.VarChar(20)
+  User User @relation(fields: [UserId], references: [id])
+  UserId Int
+  GioHang GioHang[]
+  DonHang DonHang[]
+}
+
+
+
+model NhanVien{
+  id Int@id @default(autoincrement())
+  hoTen String @db.VarChar(50)
+  tuoi Int
+  gmail String @db.VarChar(50)
+  sdt String @db.VarChar(20)
+  User User @relation(fields: [UserId], references: [id])
+  UserId Int
+  NhanVien_VaiTros NhanVien_VaiTro[]
+}
+model NhanVien_VaiTro{
+  NhanVien  NhanVien @relation(fields: [NhanVienId], references: [id])
+  NhanVienId Int
+
+  VaiTro VaiTro @relation(fields: [VaiTroId], references: [id])
+  VaiTroId Int
+
+  @@id([NhanVienId, VaiTroId])
+  @@map("NhanVien_VaiTro")
+}
+model VaiTro{
+  id Int@id @default(autoincrement())
+  tenVaiTro String @db.VarChar(50)
+  NhanVien_VaiTros NhanVien_VaiTro[]
+}
+
+model SanPham{
+  id Int@id @default(autoincrement())
+  tenSanPham String @db.VarChar(255)
+  moTa String @db.LongText
+  giaGoc Decimal @db.Decimal(10,2)
+  giaKhuyenMai Decimal? @db.Decimal(10,2)
+  soLuongTon Int?
+  trangThai String @db.VarChar(255)
+  DanhMucs DanhMuc[]
+  ThuongHieus ThuongHieu[]
+  HinhAnhs HinhAnh[]
+  SanPham_ThuocTinh SanPham_ThuocTinh[]
+  ChiTietGioHang ChiTietGioHang[]
+  ChiTietDonHang ChiTietDonHang[]
+}
+
+model DanhMuc{
+  id Int@id @default(autoincrement())
+  tenDanhMuc String @db.VarChar(255)
+  moTa String @db.LongText
+  SanPham SanPham @relation(fields: [SanPhamId],references: [id])
+  SanPhamId Int
+}
+
+model ThuongHieu{
+  id Int@id @default(autoincrement())
+  tenThuongHieu String @db.VarChar(255)
+  moTa String @db.VarChar(255)
+  SanPham SanPham @relation(fields: [SanPhamId],references: [id])
+  SanPhamId Int
+}
+
+model HinhAnh{
+  id Int@id @default(autoincrement())
+  tenHinh String @db.VarChar(255)
+  hinhAnh String? @db.VarChar(255)
+  SanPham SanPham @relation(fields: [SanPhamId],references: [id])
+  SanPhamId Int
+}
+model SanPham_ThuocTinh{
+  SanPham SanPham @relation(fields: [SanPhamId],references: [id])
+  SanPhamId Int
+
+  ThuocTinh ThuocTinh @relation(fields: [ThuocTinhId],references: [id])
+  ThuocTinhId Int
+
+  @@id([SanPhamId,ThuocTinhId])
+  @@map("SanPham_ThuocTinh")
+}
+model ThuocTinh{
+  id Int@id @default(autoincrement())
+  kichThuoc String @db.VarChar(255)
+  mauSac String @db.VarChar(255)
+  SanPham_ThuocTinh SanPham_ThuocTinh[]
+}
+
+model GioHang{
+  id Int@id @default(autoincrement())
+  ngayCapNhat DateTime
+  KhachHang KhachHang @relation(fields: [KhachHangId],references: [id])
+  KhachHangId Int
+  ChiTietGioHang ChiTietGioHang[]
+}
+
+model ChiTietGioHang{
+  GioHang GioHang @relation(fields: [GioHangId] , references: [id])
+  GioHangId Int
+
+  SanPham SanPham @relation(fields: [SanPhamId], references: [id])
+  SanPhamId Int
+
+  @@id([GioHangId, SanPhamId])
+
+}
+model DonHang{
+  id Int@id @default(autoincrement())
+  ngayDat DateTime
+  tongTien Decimal @db.Decimal(10,2)
+  trangThai String @db.VarChar(250)
+  diaChiNhan String @db.VarChar(255)
+  ngayVanChuyen DateTime
+  KhachHang KhachHang @relation(fields: [KhachHangId],references: [id])
+  KhachHangId Int
+  ChiTietDonHang ChiTietDonHang[]
+  ChiTietHoaDon ChiTietHoaDon[]
+  DonHang_VanChuyen DonHang_VanChuyen[]
+}
+
+model ChiTietDonHang{
+  DonHang DonHang @relation(fields: [DonHangId],references: [id])
+  DonHangId Int
+
+  SanPham SanPham @relation(fields: [SanPhamId], references: [id])
+  SanPhamId Int
+  @@id([DonHangId,SanPhamId])
+}
+
+model HoaDon{
+  id Int@id @default(autoincrement())
+  ngayLap DateTime
+  tongTien Decimal @db.Decimal(10,2)
+  trangThai String @db.VarChar(255)
+  ChiTietHoaDon ChiTietHoaDon[]
+  LichSuThanhToans LichSuThanhToan[]
+
+}
+model ChiTietHoaDon{
+  HoaDon HoaDon @relation(fields: [HoaDonId], references: [id])
+  HoaDonId Int
+
+  DonHang DonHang @relation(fields: [DonHangId],references: [id])
+  DonHangId Int
+
+  @@id([HoaDonId, DonHangId])
+}
+
+model PhuongThucThanhToan{
+   id Int@id @default(autoincrement())
+   tenPhuongThuc String @db.VarChar(255)
+   LichSuThanhToan LichSuThanhToan[]
+}
+model LichSuThanhToan{
+   id Int@id @default(autoincrement())
+   ngayThanhToan DateTime
+   PhuongThucThanhToan PhuongThucThanhToan @relation(fields: [PhuongThucThanhToanId], references: [id])
+   PhuongThucThanhToanId Int
+   HoaDon HoaDon @relation(fields: [HoaDonId],references: [id])
+   HoaDonId Int
+}
+model DonViVanChuyen{
+  id Int@id @default(autoincrement())
+  tenDonViVanChuyen String @db.VarChar(255)
+  DonHang_VanChuyen DonHang_VanChuyen[]
+}
+
+model DonHang_VanChuyen{
+  DonHang DonHang @relation(fields: [DonHangId], references: [id])
+  DonHangId Int
+  DonViVanChuyen DonViVanChuyen @relation(fields: [DonViVanChuyenId], references: [id])
+  DonViVanChuyenId Int
+  @@id([DonHangId, DonViVanChuyenId])
+}

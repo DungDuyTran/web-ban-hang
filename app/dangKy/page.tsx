@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-const Signup = () => {
+const DangKy = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -82,16 +82,16 @@ const Signup = () => {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-black">
+    <div className="relative w-full h-screen overflow-hidden bg-white">
       <img
         src="https://static-cse.canva.com/blob/1167217/createbanners.jpg"
         alt="background"
         className="absolute inset-0 w-full h-full object-cover opacity-50"
       />
-      <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+      <div className="absolute inset-0 bg-white bg-opacity-30"></div>
 
       <div className="relative z-10 flex items-center justify-center w-full h-full">
-        <div className="bg-black bg-opacity-60 p-10 rounded-lg w-[400px]">
+        <div className="bg-gray-600 bg-opacity-60 p-10 rounded-lg w-[400px]">
           <h1 className="text-4xl font-bold text-red-600 mb-8 text-center">
             Đăng ký
           </h1>
@@ -146,7 +146,7 @@ const Signup = () => {
 
           <p className="mt-8 text-gray-400 text-center text-sm">
             Đã có tài khoản?{" "}
-            <Link className="text-white hover:underline" href="/login">
+            <Link className="text-white hover:underline" href="/dangNhap">
               Đăng nhập
             </Link>
           </p>
@@ -156,4 +156,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default DangKy;
