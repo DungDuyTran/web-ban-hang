@@ -13,11 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
-  id Int@id @default(autoincrement())
-  KhachHang KhachHang[]
-  NhanVien NhanVien[]
-}
+
 
 model KhachHang{
   id Int@id @default(autoincrement())
@@ -25,8 +21,6 @@ model KhachHang{
   tuoi Int
   gmail String @db.VarChar(50)
   sdt String @db.VarChar(20)
-  User User @relation(fields: [UserId], references: [id])
-  UserId Int
   GioHang GioHang[]
   DonHang DonHang[]
 }
@@ -39,9 +33,8 @@ model NhanVien{
   tuoi Int
   gmail String @db.VarChar(50)
   sdt String @db.VarChar(20)
-  User User @relation(fields: [UserId], references: [id])
-  UserId Int
   NhanVien_VaiTros NhanVien_VaiTro[]
+  NhanVien_DonHang NhanVien_DonHang[]
 }
 model NhanVien_VaiTro{
   NhanVien  NhanVien @relation(fields: [NhanVienId], references: [id])
@@ -145,6 +138,14 @@ model DonHang{
   ChiTietDonHang ChiTietDonHang[]
   ChiTietHoaDon ChiTietHoaDon[]
   DonHang_VanChuyen DonHang_VanChuyen[]
+  NhanVien_DonHang NhanVien_DonHang[]
+}
+model NhanVien_DonHang{
+  NhanVien NhanVien @relation(fields: [NhanVienId], references: [id])
+  NhanVienId Int
+  DonHang DonHang @relation(fields: [DonHangId], references: [id])
+  DonHangId Int
+  @@id([NhanVienId, DonHangId])
 }
 
 model ChiTietDonHang{

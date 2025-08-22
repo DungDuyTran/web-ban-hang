@@ -63,15 +63,14 @@ export default function LoginPage() {
   return (
     <div className="relative w-full h-screen overflow-hidden bg-white">
       <img
-        src="https://static-cse.canva.com/blob/1167217/createbanners.jpg"
+        src="https://pendecor.vn/uploads/files/2023/05/01/thiet-ke-shop-quan-ao-nam-4.jpg"
         alt="background"
-        className="absolute inset-0 w-full h-full object-cover opacity-50"
+        className="absolute inset-0 w-full h-full object-cover opacity-90"
       />
-      <div className="absolute inset-0 bg-white bg-opacity-30"></div>
 
       <div className="relative z-10 flex items-center justify-center w-full h-full">
-        <div className="bg-gray-600 bg-opacity-60 p-10 rounded-lg w-[400px]">
-          <h1 className="text-4xl font-bold text-white mb-8 text-center">
+        <div className="bg-[rgb(89,48,17)] bg-opacity-60 p-10 rounded-lg w-[400px] ">
+          <h1 className="text-4xl font-bold text-red-600 mb-8 text-center">
             Đăng nhập
           </h1>
 
@@ -88,7 +87,7 @@ export default function LoginPage() {
               value={formData.email}
               onChange={handleChange}
               placeholder="Email"
-              className="p-4 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="p-4 rounded  bg-[rgba(163,86,28,0.91)] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
             />
             <input
               type="password"
@@ -96,7 +95,7 @@ export default function LoginPage() {
               value={formData.password}
               onChange={handleChange}
               placeholder="Mật khẩu"
-              className="p-4 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="p-4 rounded bg-[rgba(163,86,28,0.91)] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
             />
             <button
               type="submit"
@@ -107,7 +106,7 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <div className="flex items-center my-6">
+          {/* <div className="flex items-center my-6">
             <div className="flex-grow h-px bg-gray-600" />
             <span className="mx-4 text-gray-400">HOẶC</span>
             <div className="flex-grow h-px bg-gray-600" />
@@ -123,7 +122,7 @@ export default function LoginPage() {
               className="w-6 h-6"
             />
             Đăng nhập với Google
-          </button>
+          </button> */}
 
           <p className="mt-8 text-gray-400 text-center text-sm">
             Chưa có tài khoản?{" "}

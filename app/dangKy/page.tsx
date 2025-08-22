@@ -84,14 +84,13 @@ const DangKy = () => {
   return (
     <div className="relative w-full h-screen overflow-hidden bg-white">
       <img
-        src="https://static-cse.canva.com/blob/1167217/createbanners.jpg"
+        src="https://pendecor.vn/uploads/files/2023/05/01/thiet-ke-shop-quan-ao-nam-4.jpg"
         alt="background"
-        className="absolute inset-0 w-full h-full object-cover opacity-50"
+        className="absolute inset-0 w-full h-full object-cover opacity-90"
       />
-      <div className="absolute inset-0 bg-white bg-opacity-30"></div>
 
       <div className="relative z-10 flex items-center justify-center w-full h-full">
-        <div className="bg-gray-600 bg-opacity-60 p-10 rounded-lg w-[400px]">
+        <div className="bg-[rgb(89,48,17)] bg-opacity-60 p-10 rounded-lg w-[400px] ">
           <h1 className="text-4xl font-bold text-red-600 mb-8 text-center">
             Đăng ký
           </h1>
@@ -107,7 +106,7 @@ const DangKy = () => {
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
-              className="p-4 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="p-4 rounded bg-[rgba(163,86,28,0.91)] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
             />
             <input
               type="password"
@@ -115,7 +114,7 @@ const DangKy = () => {
               placeholder="Mật khẩu (tối thiểu 6 ký tự)"
               value={formData.password}
               onChange={handleChange}
-              className="p-4 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="p-4 rounded bg-[rgba(163,86,28,0.91)] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
             />
             <button
               type="submit"
@@ -126,13 +125,13 @@ const DangKy = () => {
             </button>
           </form>
 
-          <div className="flex items-center my-6">
+          {/* <div className="flex items-center my-6">
             <div className="flex-grow h-px bg-gray-600" />
             <span className="mx-4 text-gray-400">HOẶC</span>
             <div className="flex-grow h-px bg-gray-600" />
-          </div>
+          </div> */}
 
-          <button
+          {/* <button
             onClick={handleGoogleSignUp}
             className="w-full bg-white hover:bg-gray-100 text-black font-semibold py-3 rounded flex items-center justify-center gap-2"
           >
@@ -142,7 +141,7 @@ const DangKy = () => {
               className="w-6 h-6"
             />
             Đăng ký với Google
-          </button>
+          </button> */}
 
           <p className="mt-8 text-gray-400 text-center text-sm">
             Đã có tài khoản?{" "}
