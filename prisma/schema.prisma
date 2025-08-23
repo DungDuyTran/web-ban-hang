@@ -60,9 +60,12 @@ model SanPham{
   giaKhuyenMai Decimal? @db.Decimal(10,2)
   soLuongTon Int?
   trangThai String @db.VarChar(255)
-  DanhMucs DanhMuc[]
-  ThuongHieus ThuongHieu[]
-  HinhAnhs HinhAnh[]
+  DanhMuc DanhMuc @relation(fields: [DanhMucId], references: [id])
+  DanhMucId Int
+  ThuongHieu ThuongHieu @relation(fields: [ThuongHieuId],references: [id])
+  ThuongHieuId Int
+  HinhAnh HinhAnh @relation(fields: [HinhAnhId], references: [id])
+  HinhAnhId Int
   SanPham_ThuocTinh SanPham_ThuocTinh[]
   ChiTietGioHang ChiTietGioHang[]
   ChiTietDonHang ChiTietDonHang[]
@@ -72,24 +75,21 @@ model DanhMuc{
   id Int@id @default(autoincrement())
   tenDanhMuc String @db.VarChar(255)
   moTa String @db.LongText
-  SanPham SanPham @relation(fields: [SanPhamId],references: [id])
-  SanPhamId Int
+  SanPhams SanPham[]
 }
 
 model ThuongHieu{
   id Int@id @default(autoincrement())
   tenThuongHieu String @db.VarChar(255)
   moTa String @db.VarChar(255)
-  SanPham SanPham @relation(fields: [SanPhamId],references: [id])
-  SanPhamId Int
+  SanPhams SanPham[]
 }
 
 model HinhAnh{
   id Int@id @default(autoincrement())
   tenHinh String @db.VarChar(255)
   hinhAnh String? @db.VarChar(255)
-  SanPham SanPham @relation(fields: [SanPhamId],references: [id])
-  SanPhamId Int
+  SanPhams SanPham[]
 }
 model SanPham_ThuocTinh{
   SanPham SanPham @relation(fields: [SanPhamId],references: [id])

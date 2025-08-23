@@ -106,7 +106,7 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* <div className="flex items-center my-6">
+          <div className="flex items-center my-6">
             <div className="flex-grow h-px bg-gray-600" />
             <span className="mx-4 text-gray-400">HOẶC</span>
             <div className="flex-grow h-px bg-gray-600" />
@@ -122,7 +122,7 @@ export default function LoginPage() {
               className="w-6 h-6"
             />
             Đăng nhập với Google
-          </button> */}
+          </button>
 
           <p className="mt-8 text-gray-400 text-center text-sm">
             Chưa có tài khoản?{" "}

@@ -125,13 +125,13 @@ const DangKy = () => {
             </button>
           </form>
 
-          {/* <div className="flex items-center my-6">
+          <div className="flex items-center my-6">
             <div className="flex-grow h-px bg-gray-600" />
             <span className="mx-4 text-gray-400">HOẶC</span>
             <div className="flex-grow h-px bg-gray-600" />
-          </div> */}
+          </div>
 
-          {/* <button
+          <button
             onClick={handleGoogleSignUp}
             className="w-full bg-white hover:bg-gray-100 text-black font-semibold py-3 rounded flex items-center justify-center gap-2"
           >
@@ -141,7 +141,7 @@ const DangKy = () => {
               className="w-6 h-6"
             />
             Đăng ký với Google
-          </button> */}
+          </button>
 
           <p className="mt-8 text-gray-400 text-center text-sm">
             Đã có tài khoản?{" "}
