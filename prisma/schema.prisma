@@ -22,7 +22,8 @@ model KhachHang{
   gmail String @db.VarChar(50)
   sdt String @db.VarChar(20)
   GioHang GioHang[]
-  DonHang DonHang[]
+  DonHangs DonHang[]
+  HoaDons HoaDon[]
 }
 
 
@@ -122,7 +123,8 @@ model ChiTietGioHang{
 
   SanPham SanPham @relation(fields: [SanPhamId], references: [id])
   SanPhamId Int
-
+  soLuong   Int       @default(1)               
+  donGia    Decimal   @db.Decimal(10,2)
   @@id([GioHangId, SanPhamId])
 
 }
@@ -137,8 +139,8 @@ model DonHang{
   KhachHangId Int
   ChiTietDonHang ChiTietDonHang[]
   ChiTietHoaDon ChiTietHoaDon[]
-  DonHang_VanChuyen DonHang_VanChuyen[]
   NhanVien_DonHang NhanVien_DonHang[]
+  DonHang_VanChuyen DonHang_VanChuyen[]
 }
 model NhanVien_DonHang{
   NhanVien NhanVien @relation(fields: [NhanVienId], references: [id])
@@ -151,10 +153,10 @@ model NhanVien_DonHang{
 model ChiTietDonHang{
   DonHang DonHang @relation(fields: [DonHangId],references: [id])
   DonHangId Int
-
   SanPham SanPham @relation(fields: [SanPhamId], references: [id])
   SanPhamId Int
   @@id([DonHangId,SanPhamId])
+  soLuong Int
 }
 
 model HoaDon{
@@ -164,12 +166,13 @@ model HoaDon{
   trangThai String @db.VarChar(255)
   ChiTietHoaDon ChiTietHoaDon[]
   LichSuThanhToans LichSuThanhToan[]
+  KhachHang KhachHang @relation(fields: [KhachHangId],references: [id])
+  KhachHangId Int
 
 }
 model ChiTietHoaDon{
   HoaDon HoaDon @relation(fields: [HoaDonId], references: [id])
   HoaDonId Int
-
   DonHang DonHang @relation(fields: [DonHangId],references: [id])
   DonHangId Int
 
@@ -192,13 +195,17 @@ model LichSuThanhToan{
 model DonViVanChuyen{
   id Int@id @default(autoincrement())
   tenDonViVanChuyen String @db.VarChar(255)
+  sdt String
+  gmail String
+  diaChi String
   DonHang_VanChuyen DonHang_VanChuyen[]
 }
-
 model DonHang_VanChuyen{
   DonHang DonHang @relation(fields: [DonHangId], references: [id])
   DonHangId Int
   DonViVanChuyen DonViVanChuyen @relation(fields: [DonViVanChuyenId], references: [id])
   DonViVanChuyenId Int
-  @@id([DonHangId, DonViVanChuyenId])
+  @@id([DonHangId,DonViVanChuyenId])
 }
+
+
