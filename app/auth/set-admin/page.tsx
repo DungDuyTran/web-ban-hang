@@ -12,6 +12,7 @@ export default function SetAdminPage() {
   const handleSetAdmin = async () => {
     setLoading(true);
     try {
+      // 🔑 Đăng nhập Google
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
 
