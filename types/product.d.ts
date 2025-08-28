@@ -10,6 +10,7 @@ export interface Product {
   danhMucId: number;
   thuongHieuId: number;
   hinhAnhId: number;
+  hinhAnhUrl?: string;
 }
 
 export interface Category {

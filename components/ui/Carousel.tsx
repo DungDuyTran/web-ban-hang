@@ -17,17 +17,24 @@ export default function Carousel() {
         modules={[Pagination, Autoplay]}
         className=" shadow-lg"
       >
-        {/* <SwiperSlide>
+        <SwiperSlide>
           <img
-            src="/anh1.png"
+            src="/anh7.jpeg"
             alt="Slide 1"
             className="w-full h-auto object-cover "
           />
-        </SwiperSlide> */}
+        </SwiperSlide>
         <SwiperSlide>
           <img
             src="/anh2.webp"
             alt="Slide 2"
+            className="w-full h-auto object-cover "
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img
+            src="/anh6.webp"
+            alt="Slide 4"
             className="w-full h-auto object-cover "
           />
         </SwiperSlide>
@@ -38,14 +45,8 @@ export default function Carousel() {
             className="w-full h-auto object-cover "
           />
         </SwiperSlide>
+
         {/* <SwiperSlide>
-          <img
-            src="/anh4.jpg"
-            alt="Slide 4"
-            className="w-full h-auto object-cover "
-          />
-        </SwiperSlide>
-        <SwiperSlide>
           <img
             src="/anh5.jpg"
             alt="Slide 5"
