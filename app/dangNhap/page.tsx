@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { auth, googleProvider } from "@/lib/firebase";
+import { auth, googleProvider } from "@/lib/firebaseClient";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
@@ -28,7 +28,6 @@ export default function LoginPage() {
     } catch (err: any) {
       console.error("Login error:", err);
       let errorMessage = "❌ Đăng nhập thất bại";
-
       switch (err.code) {
         case "auth/user-not-found":
           errorMessage = "Tài khoản không tồn tại";
@@ -43,7 +42,6 @@ export default function LoginPage() {
           errorMessage = "Quá nhiều lần thử. Vui lòng thử lại sau";
           break;
       }
-
       setError(errorMessage);
     } finally {
       setLoading(false);
@@ -69,7 +67,7 @@ export default function LoginPage() {
       />
 
       <div className="relative z-10 flex items-center justify-center w-full h-full">
-        <div className="bg-[rgb(89,48,17)] bg-opacity-60 p-10 rounded-lg w-[400px] ">
+        <div className="bg-[rgb(89,48,17)] bg-opacity-60 p-10 rounded-lg w-[400px]">
           <h1 className="text-4xl font-bold text-red-600 mb-8 text-center">
             Đăng nhập
           </h1>
@@ -87,7 +85,7 @@ export default function LoginPage() {
               value={formData.email}
               onChange={handleChange}
               placeholder="Email"
-              className="p-4 rounded  bg-[rgba(163,86,28,0.91)] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="p-4 rounded bg-[rgba(163,86,28,0.91)] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
             />
             <input
               type="password"

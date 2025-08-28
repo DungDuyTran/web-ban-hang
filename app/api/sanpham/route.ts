@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
         HinhAnh: true,
       },
     });
-    return NextResponse.json({ data }, { status: 200 });
+    return NextResponse.json(data, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 400 });
   }

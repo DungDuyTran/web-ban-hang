@@ -16,7 +16,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { auth } from "@/lib/firebase";
+import { auth, googleProvider } from "@/lib/firebaseClient";
 
 interface AuthContextType {
   user: User | null;
@@ -52,8 +52,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const loginWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
-    await signInWithPopup(auth, provider);
+    await signInWithPopup(auth, googleProvider);
   };
 
   const logout = async () => {
