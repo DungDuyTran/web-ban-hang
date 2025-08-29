@@ -20,7 +20,7 @@ const TopHeader = () => {
         </div>
         <div className="col-start-3 md:col-start-3 gap-4  flex justify-center items-center ">
           <button
-            className="hover:bg-[rgb(187,139,90)] bg-[rgb(138,90,42)] w-[120px] h-[50px] rounded-xl text-white shadow"
+            className="hover:bg-[rgb(187,139,90)] bg-[rgb(138,90,42)] w-[120px] h-[40px] rounded-xl text-white shadow"
             onClick={() => {
               router.push("/dangNhap");
             }}
@@ -28,7 +28,7 @@ const TopHeader = () => {
             Đăng Nhập
           </button>
           <button
-            className="hover:bg-[rgb(187,139,90)] bg-[rgb(138,90,42)] w-[110px] h-[50px] rounded-xl text-white"
+            className="hover:bg-[rgb(187,139,90)] bg-[rgb(138,90,42)] w-[110px] h-[40px] rounded-xl text-white"
             onClick={() => {
               router.push("/dangKy");
             }}

@@ -3,6 +3,7 @@ import TopHeader from "@/components/ui/TopHeader";
 import Carousel from "@/components/ui/Carousel";
 import ProductPage from "@/components/ui/product";
 import Product2 from "@/components/ui/product2";
+import Footer from "@/components/ui/footer";
 const Content = () => {
   return (
     <div>
@@ -18,6 +19,10 @@ const Content = () => {
       </div>
       <div>
         <Product2 />
+      </div>
+
+      <div>
+        <Footer />
       </div>
     </div>
   );
