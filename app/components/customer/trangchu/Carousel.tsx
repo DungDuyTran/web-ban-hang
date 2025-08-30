@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 
 export default function Carousel() {
   return (
-    <div className="w-screen z-0 relative">
+    <div className="w-screen">
       <Swiper
         pagination={{ dynamicBullets: true }}
         autoplay={{ delay: 5000, disableOnInteraction: false }}

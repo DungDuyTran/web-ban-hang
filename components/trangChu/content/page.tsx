@@ -11,7 +11,7 @@ const Content = () => {
         <TopHeader />
       </div>
 
-      <div className="mt-[70px]">
+      <div className="mt-[70px] ">
         <Carousel />
       </div>
       <div>

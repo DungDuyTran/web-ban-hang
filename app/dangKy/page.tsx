@@ -52,14 +52,14 @@ export default function SignupPage() {
   return (
     <div className="relative w-full h-screen overflow-hidden bg-white">
       <img
-        src="https://pendecor.vn/uploads/files/2023/05/01/thiet-ke-shop-quan-ao-nam-4.jpg"
+        src="/dangky.jpg"
         alt="background"
         className="absolute inset-0 w-full h-full object-cover opacity-90"
       />
 
       <div className="relative z-10 flex items-center justify-center w-full h-full">
-        <div className="bg-[rgb(89,48,17)] bg-opacity-60 p-10 rounded-lg w-[400px]">
-          <h1 className="text-4xl font-bold text-red-600 mb-8 text-center">
+        <div className="bg-[rgb(202,177,101)] bg-opacity-60 p-10 rounded-lg w-[400px] opacity-95">
+          <h1 className="text-4xl font-bold text-[rgb(255,255,255)] mb-8 text-center">
             Đăng ký
           </h1>
 
@@ -76,7 +76,7 @@ export default function SignupPage() {
               value={formData.email}
               onChange={handleChange}
               placeholder="Email"
-              className="p-4 rounded bg-[rgba(163,86,28,0.91)] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="p-4 rounded bg-white text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
             />
             <input
               type="password"
@@ -84,20 +84,20 @@ export default function SignupPage() {
               value={formData.password}
               onChange={handleChange}
               placeholder="Mật khẩu"
-              className="p-4 rounded bg-[rgba(163,86,28,0.91)] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="p-4 rounded bg-white text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
             />
             <button
               type="submit"
               disabled={loading}
-              className="mt-4 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded disabled:opacity-50"
+              className="mt-4 bg-[rgb(125,105,44)] hover:bg-[rgb(155,134,72)] text-white font-semibold py-3 rounded disabled:opacity-50"
             >
               {loading ? "Đang đăng ký..." : "Đăng ký"}
             </button>
           </form>
 
-          <p className="mt-8 text-gray-400 text-center text-sm">
+          <p className="mt-8 text-black text-center text-sm">
             Đã có tài khoản?{" "}
-            <a className="text-white hover:underline" href="/dangNhap">
+            <a className="text-white hover:underline mr-3" href="/dangNhap">
               Đăng nhập ngay
             </a>
           </p>

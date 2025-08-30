@@ -58,7 +58,7 @@ const Product2 = () => {
           />
         </div>
         <div className="col-span-5 row-start-5 bg-white h-[270px]">
-          <h3 className="text-black font-[courier] flex justify-center items-center text-4xl mt-3">
+          <h3 className="text-black font-[courier] flex justify-center items-center text-4xl mt-3 font-bold">
             Thương hiệu
           </h3>
           <div className="grid grid-cols-4 ml-[140px] mt-[30px]">
@@ -102,6 +102,9 @@ const Product2 = () => {
                 /DICO START LOGO/
               </h4>
             </div>
+          </div>
+          <div className="w-screen h-auto mt-[35px]">
+            <img src="/anh12.jpg" alt="anh12" />
           </div>
         </div>
       </div>

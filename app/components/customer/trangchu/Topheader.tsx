@@ -11,6 +11,7 @@ const TopHeader = () => {
           <img src="/LOGO.png" alt="Logo" className="w-[200px] h-auto" />
         </div>
         <div className="col-start-2 md:col-start-2 gap-8  flex justify-center items-center font-mono">
+          <div className="">SHOP</div>
           <div>DRAGON BALL Z</div>
           <div>COLLABS</div>
           <div>CONTACT</div>
@@ -19,20 +20,12 @@ const TopHeader = () => {
         </div>
         <div className="col-start-3 md:col-start-3 gap-2  flex justify-center items-center ">
           <button
-            className=" w-[100px] h-[40px] rounded-xl text-amber-900 shadow font-mono hover:bg-amber-900 hover:text-white"
-            onClick={() => {
-              router.push("/dangNhap");
-            }}
-          >
-            Sign in
-          </button>
-          <button
             className=" w-[100px] h-[40px] rounded-xl text-amber-900 font-mono shadow hover:bg-amber-900 hover:text-white"
             onClick={() => {
-              router.push("/dangKy");
+              router.push("/");
             }}
           >
-            Sign up
+            LOG OUT
           </button>
         </div>
       </div>

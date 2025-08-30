@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="bg-white mt-[80px]">
+    <div className="bg-white mt-[720px]">
       <div className="flex justify-center items-center h-[100px]">
         <h3 className="font-mono text-xl text-black ">
           Copyright © 2023 Dirty Coins Studio. Powered by Sapo

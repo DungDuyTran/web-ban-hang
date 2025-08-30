@@ -44,7 +44,7 @@ export default function ProductPage() {
 
   return (
     <div className="p-6 bg-white text-black w-screen ">
-      <h1 className="text-4xl mb-6 text-center font-[courier] ">
+      <h1 className="text-4xl mb-6 text-center font-[courier] font-bold ">
         Danh sách sản phẩm
       </h1>
 
