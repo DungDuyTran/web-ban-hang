@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useRouter } from "next/navigation";
-
+import TopMenu from "../../topmenu/page";
 const TopHeader = () => {
   const router = useRouter();
   return (
@@ -11,12 +11,7 @@ const TopHeader = () => {
           <img src="/LOGO.png" alt="Logo" className="w-[200px] h-auto" />
         </div>
         <div className="col-start-2 md:col-start-2 gap-8  flex justify-center items-center font-mono">
-          <div className="">SHOP</div>
-          <div>DRAGON BALL Z</div>
-          <div>COLLABS</div>
-          <div>CONTACT</div>
-          <div>ABOUT US</div>
-          <div>BEST SELLER</div>
+          <TopMenu />
         </div>
         <div className="col-start-3 md:col-start-3 gap-2  flex justify-center items-center ">
           <button

@@ -76,7 +76,7 @@ export default function SignupPage() {
               value={formData.email}
               onChange={handleChange}
               placeholder="Email"
-              className="p-4 rounded bg-white text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="p-4 rounded bg-white text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[rgb(124,111,37)]"
             />
             <input
               type="password"
@@ -84,7 +84,7 @@ export default function SignupPage() {
               value={formData.password}
               onChange={handleChange}
               placeholder="Mật khẩu"
-              className="p-4 rounded bg-white text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="p-4 rounded bg-white text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[rgb(124,111,37)]"
             />
             <button
               type="submit"

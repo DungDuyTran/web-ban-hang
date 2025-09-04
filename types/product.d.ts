@@ -6,11 +6,14 @@ export interface Product {
   giaGoc: number;
   giaKhuyenMai?: number;
   soLuongTon?: number;
-  trangthaiId: number;
+  trangThai: string;
   danhMucId: number;
   thuongHieuId: number;
   hinhAnhId: number;
   hinhAnhUrl?: string;
+  DanhMuc?: Category;
+  ThuongHieu?: Brand;
+  HinhAnh?: Image;
 }
 
 export interface Category {

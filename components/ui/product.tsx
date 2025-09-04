@@ -89,7 +89,7 @@ export default function ProductPage() {
         ))}
       </div>
 
-      {/* 🟢 Pagination */}
+      {/* Pagination */}
       {/* Pagination */}
       <div className="flex justify-end mr-[150px] mt-8 space-x-2">
         {/* Prev */}

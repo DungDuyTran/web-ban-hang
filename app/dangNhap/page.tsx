@@ -85,7 +85,7 @@ export default function LoginPage() {
               value={formData.email}
               onChange={handleChange}
               placeholder="Email"
-              className="p-4 rounded bg-[rgb(207,198,149)] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="p-4 rounded bg-[rgb(207,198,149)] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[rgb(124,111,37)]"
             />
             <input
               type="password"
@@ -93,8 +93,14 @@ export default function LoginPage() {
               value={formData.password}
               onChange={handleChange}
               placeholder="Mật khẩu"
-              className="p-4 rounded bg-[rgb(207,198,149)] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="p-4 rounded bg-[rgb(207,198,149)] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[rgb(124,111,37)]"
             />
+            <a
+              href="#"
+              className="flex justify-center ml-2 mt-[-5px] text-[rgb(150,138,68)] hover:text-[rgb(121,110,49)] hover:underline "
+            >
+              Quên mật khẩu ?
+            </a>
             <button
               type="submit"
               disabled={loading}
