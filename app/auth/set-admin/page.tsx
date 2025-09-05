@@ -12,11 +12,11 @@ export default function SetAdminPage() {
   const handleSetAdmin = async () => {
     setLoading(true);
     try {
-      // 🔑 Đăng nhập Google
+      // Đăng nhập Google
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
 
-      // 🚀 Gọi API để set role admin
+      //Gọi API để set role admin
       const res = await fetch("/api/setAdmin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -28,10 +28,10 @@ export default function SetAdminPage() {
 
       setMessage("Set Admin Result: " + JSON.stringify(data));
 
-      // 🔥 Làm mới token để nhận custom claims
+      //Làm mới token để nhận custom claims
       await user.getIdToken(true);
 
-      // ✅ Lấy claim mới
+      // Lấy claim mới
       const tokenResult = await getIdTokenResult(user);
       console.log("Token Result:", tokenResult);
 

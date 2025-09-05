@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import { Product } from "@/types";
+import { useRouter } from "next/navigation";
 
 export default function ProductDetail() {
   const params = useParams();
   const id = params?.id;
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     if (!id) return;
@@ -46,7 +48,7 @@ export default function ProductDetail() {
     <div className="p-6 bg-white text-black max-w-4xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Ảnh */}
-        <div className="relative w-full h-96">
+        <div className="relative w-full h-130">
           <Image
             src={product.HinhAnh?.hinhAnh || "/no-image.png"}
             alt={product.tenSanPham}
@@ -57,7 +59,7 @@ export default function ProductDetail() {
 
         {/* Thông tin */}
         <div>
-          <h1 className="text-3xl font-bold mb-3">{product.tenSanPham}</h1>
+          <h2 className="text-3xl font-bold mb-3">{product.tenSanPham}</h2>
           <p className="text-gray-600 mb-4">{product.moTa}</p>
 
           <div className="mb-4">
@@ -95,8 +97,18 @@ export default function ProductDetail() {
             {product.ThuongHieu?.tenThuongHieu}
           </p>
 
-          <button className="mt-5 px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+          <button className="mt-5 px-5 py-2 bg-white text-black hover:bg-black hover:text-white mr-5 border border-black">
             Thêm vào giỏ hàng
+          </button>
+          <button className="mt-5 px-5 py-2  bg-black hover:bg-white text-white hover:text-black border border-black   ">
+            Mua ngay
+          </button>
+          <br />
+          <button
+            onClick={() => router.push("/customer/trangchu")}
+            className="bg-white text-black border border-black mt-5 w-[100px] h-[45px] hover:text-white hover:bg-black"
+          >
+            Quay lại
           </button>
         </div>
       </div>

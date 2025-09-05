@@ -6,6 +6,7 @@ const nextConfig = {
       "images.unsplash.com",
       "i.imgur.com",
       "images.pexels.com", // 👈 thêm dòng này
+      "down-vn.img.susercontent.com",
     ],
   },
 };

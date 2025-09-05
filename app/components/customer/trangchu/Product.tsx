@@ -1,14 +1,14 @@
 "use client";
+
 import { useState, useEffect } from "react";
-import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Product } from "@/types/product";
-import { boolean } from "zod";
-import { Link } from "react-router-dom";
 
 export default function ProductCus() {
-  const [products, setProduct] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+
   // lọc
   const [filters, setFilter] = useState({
     danhMuc: "",
@@ -27,18 +27,20 @@ export default function ProductCus() {
           ...p,
           giaGoc: Number(p.giaGoc),
           giaKhuyenMai: p.giaKhuyenMai ? Number(p.giaKhuyenMai) : undefined,
-          hinhAnhUrl: p.HinhAnh?.hinhAnh || "no-image.png,",
+          hinhAnhUrl: p.HinhAnh?.hinhAnh || "/no-image.png",
         }));
-        setProduct(mapped);
+        setProducts(mapped);
       } catch (error) {
-        console.error("Loi khi load san pham", error);
+        console.error("Lỗi khi load sản phẩm:", error);
       } finally {
         setLoading(false);
       }
     };
     fetchProducts();
   }, []);
-  if (loading) return <p className="text-black">Đang loading sản phẩm</p>;
+
+  if (loading) return <p className="text-black">Đang loading sản phẩm...</p>;
+
   // danh sách lọc
   const danhMucList = [
     ...new Set(products.map((sp) => sp.DanhMuc?.tenDanhMuc).filter(Boolean)),
@@ -48,17 +50,25 @@ export default function ProductCus() {
       products.map((sp) => sp.ThuongHieu?.tenThuongHieu).filter(Boolean)
     ),
   ] as string[];
-  //áp dụng bộ lọc
+
+  // áp dụng bộ lọc
   const filteredProduct = products.filter((sp) => {
     const matchDanhMuc =
       !filters.danhMuc || sp.DanhMuc?.tenDanhMuc === filters.danhMuc;
     const matchThuongHieu =
       !filters.thuongHieu ||
       sp.ThuongHieu?.tenThuongHieu === filters.thuongHieu;
-    const matchMin = !filters.minPrice || sp.giaGoc >= Number(filters.minPrice);
-    const matchMax = !filters.maxPrice || sp.giaGoc <= Number(filters.maxPrice);
-    return matchDanhMuc && matchThuongHieu && matchMax && matchMin;
+
+    const min = filters.minPrice ? Number(filters.minPrice) : null;
+    const max = filters.maxPrice ? Number(filters.maxPrice) : null;
+
+    const giaThucTe = sp.giaKhuyenMai ?? sp.giaGoc; // nếu có khuyến mãi thì dùng khuyến mãi
+
+    const matchMin = min === null || giaThucTe >= min;
+    const matchMax = max === null || giaThucTe <= max;
+    return matchDanhMuc && matchThuongHieu && matchMin && matchMax;
   });
+
   const resetFilters = () =>
     setFilter({ danhMuc: "", thuongHieu: "", minPrice: "", maxPrice: "" });
 
@@ -67,9 +77,10 @@ export default function ProductCus() {
       <h1 className="text-4xl font-bold font-mono flex justify-center mt-4 mb-5">
         Danh sách sản phẩm
       </h1>
-      {/* Lọc */}
+
+      {/* Bộ lọc */}
       <div className="flex flex-wrap gap-7 justify-center mb-5">
-        {/* danh muc */}
+        {/* Danh mục */}
         <select
           value={filters.danhMuc}
           onChange={(e) => setFilter({ ...filters, danhMuc: e.target.value })}
@@ -82,7 +93,8 @@ export default function ProductCus() {
             </option>
           ))}
         </select>
-        {/* Thuongq hiệu */}
+
+        {/* Thương hiệu */}
         <select
           value={filters.thuongHieu}
           onChange={(e) =>
@@ -97,6 +109,7 @@ export default function ProductCus() {
             </option>
           ))}
         </select>
+
         <input
           type="number"
           placeholder="Giá từ"
@@ -116,42 +129,48 @@ export default function ProductCus() {
         </button>
       </div>
 
-      {/* san pham */}
+      {/* Danh sách sản phẩm */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-5">
         {filteredProduct.length === 0 && <p>Không tìm thấy sản phẩm</p>}
+
         {filteredProduct.map((product) => (
-          <a href="/product/${product.id}" key={product.id}>
-            <div className="hover:shadow-lg shadow-2xl transition p-4 flex flex-col">
+          <Link href={`/customer/product/${product.id}`} key={product.id}>
+            <div className="hover:shadow-lg shadow-2xl transition p-4 flex flex-col cursor-pointer h-[330px]">
+              {/* Ảnh */}
               <div className="w-full h-48 relative mb-4">
                 <Image
                   src={product.hinhAnhUrl || "/no-image.png"}
                   alt={product.tenSanPham}
                   fill
                   unoptimized
-                  className="object-cover"
+                  className="object-cover rounded-md"
                 />
               </div>
-              <h2 className="text-lg font-semibold text-center">
+
+              {/* Tên sản phẩm */}
+              <h2 className="text-lg font-semibold text-center line-clamp-2">
                 {product.tenSanPham}
               </h2>
-              <div className="mt-2 text-xl flex justify-center">
+
+              {/* Giá */}
+              <div className="mt-auto text-xl flex justify-center">
                 {product.giaKhuyenMai ? (
-                  <div>
+                  <div className="text-center">
                     <span className="text-red-500 font-bold mr-2">
                       {product.giaKhuyenMai.toLocaleString()} đ
                     </span>
                     <span className="line-through text-gray-400">
-                      {product.giaGoc.toLocaleString()}đ
+                      {product.giaGoc.toLocaleString()} đ
                     </span>
                   </div>
                 ) : (
                   <span className="text-gray-800 font-bold">
-                    {product.giaGoc.toLocaleString()}đ
+                    {product.giaGoc.toLocaleString()} đ
                   </span>
                 )}
               </div>
             </div>
-          </a>
+          </Link>
         ))}
       </div>
     </div>
