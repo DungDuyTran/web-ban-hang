@@ -2,6 +2,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import TopMenu from "../../topmenu/page";
+import { User, ShoppingCart, Bell } from "lucide-react";
 const TopHeader = () => {
   const router = useRouter();
   return (
@@ -13,14 +14,21 @@ const TopHeader = () => {
         <div className="col-start-2 md:col-start-2 gap-8  flex justify-center items-center font-mono">
           <TopMenu />
         </div>
-        <div className="col-start-3 md:col-start-3 gap-2  flex justify-center items-center ">
+        <div className="col-start-3 md:col-start-3 gap-5  flex justify-center items-center ">
           <button
-            className=" w-[100px] h-[40px] rounded-xl text-amber-900 font-mono shadow hover:bg-amber-900 hover:text-white"
-            onClick={() => {
-              router.push("/");
-            }}
+            className="hover:text-amber-900"
+            onClick={() => router.push("/customer/taikhoan")}
           >
-            LOG OUT
+            <User />
+          </button>
+          <button className="hover:text-amber-900">
+            <Bell />
+          </button>
+          <button
+            onClick={() => router.push("/customer/giohang")}
+            className="hover:text-amber-900"
+          >
+            <ShoppingCart />
           </button>
         </div>
       </div>
