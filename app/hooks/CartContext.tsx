@@ -16,16 +16,22 @@ interface CartContextType {
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: number) => void;
+  updateCartItem: (id: number, updates: Partial<CartItem>) => void;
   clearCart: () => void;
   isCartOpen: boolean;
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedProductId: number | null; // 👈 thêm
+  setSelectedProductId: React.Dispatch<React.SetStateAction<number | null>>; // 👈 thêm
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
-  const [isCartOpen, setIsCartOpen] = useState(false); // ✅ thêm state
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState<number | null>(
+    null
+  ); // 👈 thêm
 
   const addToCart = (item: CartItem) => {
     setCart((prev) => {
@@ -41,15 +47,23 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       }
       return [...prev, item];
     });
+
+    // 👇 Khi thêm sản phẩm thì set id cho dialog chỉ hiện cái đó
+    setSelectedProductId(item.id);
+    setIsCartOpen(true);
   };
 
   const removeFromCart = (id: number) => {
     setCart((prev) => prev.filter((p) => p.id !== id));
   };
 
-  const clearCart = () => {
-    setCart([]);
+  const updateCartItem = (id: number, updates: Partial<CartItem>) => {
+    setCart((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, ...updates } : item))
+    );
   };
+
+  const clearCart = () => setCart([]);
 
   return (
     <CartContext.Provider
@@ -57,10 +71,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         cart,
         addToCart,
         removeFromCart,
+        updateCartItem,
         clearCart,
         isCartOpen,
         setIsCartOpen,
-      }} // ✅ truyền vào
+        selectedProductId, // 👈 thêm
+        setSelectedProductId, // 👈 thêm
+      }}
     >
       {children}
     </CartContext.Provider>
