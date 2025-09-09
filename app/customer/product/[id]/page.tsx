@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import Image from "next/image";
 import { Product } from "@/types";
 import { useRouter } from "next/navigation";
+import { useCart } from "@/app/hooks/CartContext";
 
 export default function ProductDetail() {
   const params = useParams();
@@ -12,6 +13,7 @@ export default function ProductDetail() {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const { addToCart, setIsCartOpen } = useCart();
 
   useEffect(() => {
     if (!id) return;
@@ -97,9 +99,24 @@ export default function ProductDetail() {
             {product.ThuongHieu?.tenThuongHieu}
           </p>
 
-          <button className="mt-5 px-5 py-2 bg-white text-black hover:bg-black hover:text-white mr-5 border border-black">
+          <button
+            onClick={() => {
+              if (!product) return;
+              const cartItem = {
+                id: product.id,
+                tenSanPham: product.tenSanPham,
+                gia: product.giaKhuyenMai ?? product.giaGoc,
+                hinhAnh: product.HinhAnh?.hinhAnh || "/no-image.png",
+                soLuong: 1,
+              };
+              addToCart(cartItem);
+              setIsCartOpen(true); // 👈 mở dialog
+            }}
+            className="mt-5 px-5 py-2 bg-white text-black hover:bg-black hover:text-white mr-5 border border-black"
+          >
             Thêm vào giỏ hàng
           </button>
+
           <button className="mt-5 px-5 py-2  bg-black hover:bg-white text-white hover:text-black border border-black   ">
             Mua ngay
           </button>

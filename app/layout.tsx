@@ -2,31 +2,36 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "./hooks/useAuth";
+import { CartProvider } from "./hooks/CartContext";
+import CartDialog from "./components/customer/cart/CartDialog";
 
-// Import Roboto
 const roboto = Roboto({
   variable: "--font-roboto",
-  weight: ["400", "500", "700"], // thường dùng trong UI: regular, medium, bold
+  weight: ["400", "500", "700"],
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Loya",
+  title: "DIRTYCOINS",
   description: "Shop thời trang mới",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <div>
-      <html lang="vi">
-        <body className={`${roboto.variable} antialiased`}>
-          <AuthProvider>{children}</AuthProvider>
-        </body>
-      </html>
-    </div>
+    <html lang="vi">
+      <body className={`${roboto.variable} antialiased`}>
+        <AuthProvider>
+          <CartProvider>
+            {children}
+
+            <CartDialog />
+          </CartProvider>
+        </AuthProvider>
+      </body>
+    </html>
   );
 }

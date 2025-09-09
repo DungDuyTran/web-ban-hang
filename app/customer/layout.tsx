@@ -1,4 +1,5 @@
 import TopHeader from "@/app/components/customer/trangchu/Topheader";
+import { CartProvider } from "../hooks/CartContext";
 
 export default function CustomerLayout({
   children,
