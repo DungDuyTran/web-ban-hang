@@ -26,8 +26,6 @@ model KhachHang{
   HoaDons HoaDon[]
 }
 
-
-
 model NhanVien{
   id Int@id @default(autoincrement())
   hoTen String @db.VarChar(50)

@@ -110,7 +110,7 @@ export default function ProductDetail() {
                 soLuong: 1,
               };
               addToCart(cartItem);
-              setIsCartOpen(true); // 👈 mở dialog
+              setIsCartOpen(true); // mở dialog
             }}
             className="mt-5 px-5 py-2 bg-white text-black hover:bg-black hover:text-white mr-5 border border-black"
           >

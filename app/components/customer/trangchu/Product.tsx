@@ -135,7 +135,7 @@ export default function ProductCus() {
 
         {filteredProduct.map((product) => (
           <Link href={`/customer/product/${product.id}`} key={product.id}>
-            <div className="hover:shadow-lg shadow-2xl transition p-4 flex flex-col cursor-pointer h-[330px]">
+            <div className="hover:shadow-lg shadow-2xl transition p-4 flex flex-col cursor-pointer h-[300px] border">
               {/* Ảnh */}
               <div className="w-full h-48 relative mb-4">
                 <Image
@@ -148,12 +148,12 @@ export default function ProductCus() {
               </div>
 
               {/* Tên sản phẩm */}
-              <h2 className="text-lg font-semibold text-center line-clamp-2">
+              <h2 className="text-lg font-semibold text-center line-clamp-1">
                 {product.tenSanPham}
               </h2>
 
               {/* Giá */}
-              <div className="mt-auto text-xl flex justify-center">
+              <div className="mt-[10px] text-xl flex justify-center">
                 {product.giaKhuyenMai ? (
                   <div className="text-center">
                     <span className="text-red-500 font-bold mr-2">

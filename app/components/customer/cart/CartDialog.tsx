@@ -1,5 +1,5 @@
 "use client";
-
+import { toast } from "sonner";
 import {
   Dialog,
   DialogContent,
@@ -48,7 +48,12 @@ export default function CartDialog() {
       soLuong,
     });
 
-    alert("Thêm vào giỏ hàng thành công!");
+    toast.success("Thêm vào giỏ hàng thành công", {
+      style: {
+        background: "black",
+        color: "white",
+      },
+    });
 
     // Đóng dialog
     setIsCartOpen(false);

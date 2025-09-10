@@ -10,10 +10,11 @@ if (!admin.apps.length) {
       clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
       privateKey,
     }),
-    storageBucket: process.env.FIREBASE_STORAGE_BUCKET, // không cần NEXT_PUBLIC
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
   });
 }
 
+export { admin }; // thêm dòng này
 export const adminAuth = admin.auth();
 export const adminDb = admin.firestore();
 export const adminStorage = admin.storage();

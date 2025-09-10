@@ -7,8 +7,8 @@ import { data } from "react-router-dom";
 const SanPhamSchema = z.object({
   tenSanPham: z.string(),
   moTa: z.string(),
-  giaGoc: z.number(),
-  giaKhuyenMai: z.number().optional(),
+  giaGoc: z.string(),
+  giaKhuyenMai: z.string(),
   soLuongTon: z.number().int(),
   trangThai: z.string(),
   danhMucId: z.number().int().positive(),

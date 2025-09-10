@@ -18,7 +18,7 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
-      setError("⚠️ Vui lòng nhập đầy đủ thông tin");
+      setError(" Vui lòng nhập đầy đủ thông tin");
       return;
     }
     setLoading(true);
@@ -27,7 +27,7 @@ export default function LoginPage() {
       router.push("/customer/trangchu"); // chuyển về trang chủ sau khi login
     } catch (err: any) {
       console.error("Login error:", err);
-      let errorMessage = "❌ Đăng nhập thất bại";
+      let errorMessage = " Đăng nhập thất bại";
       switch (err.code) {
         case "auth/user-not-found":
           errorMessage = "Tài khoản không tồn tại";
@@ -54,7 +54,7 @@ export default function LoginPage() {
       router.push("/customer/trangchu");
     } catch (err) {
       console.error("Google sign in error:", err);
-      setError("❌ Không thể đăng nhập với Google");
+      setError("Không thể đăng nhập với Google");
     }
   };
 

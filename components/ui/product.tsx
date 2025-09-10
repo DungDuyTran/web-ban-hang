@@ -69,7 +69,7 @@ export default function ProductPage() {
               {product.tenSanPham}
             </h2>
 
-            <div className="mt-2 text-xl flex justify-center">
+            <div className=" mt-2 text-xl flex justify-center">
               {product.giaKhuyenMai ? (
                 <div>
                   <span className="text-red-500 font-bold mr-2">
