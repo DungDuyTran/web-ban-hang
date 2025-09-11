@@ -53,7 +53,7 @@ export default function ProductPage() {
         {currentProducts.map((product) => (
           <div
             key={product.id}
-            className="hover:shadow-lg shadow-xl transition p-4 flex flex-col"
+            className="hover:shadow-lg shadow-xl transition p-4 flex flex-col border"
           >
             <div className="w-full h-48 relative mb-4">
               <Image
@@ -65,7 +65,7 @@ export default function ProductPage() {
               />
             </div>
 
-            <h2 className="text-lg font-semibold text-center">
+            <h2 className="text-lg font-semibold text-center line-clamp-1">
               {product.tenSanPham}
             </h2>
 

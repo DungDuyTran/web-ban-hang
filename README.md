@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 Dirtycoin - Online Shop
 
-## Getting Started
+Dự án **web bán hàng online Dirtycoin** được xây dựng bằng **Next.js + React + TypeScript**, với mục tiêu tạo ra một nền tảng thương mại điện tử hiện đại, dễ mở rộng, và trải nghiệm người dùng mượt mà.
 
-First, run the development server:
+## 🚀 Công nghệ sử dụng
+
+- **Next.js 15** – Framework React mạnh mẽ, hỗ trợ SEO và tối ưu hiệu năng.
+- **React 19 + TypeScript** – Phát triển giao diện nhanh, chặt chẽ với kiểu dữ liệu.
+- **TailwindCSS + DaisyUI** – Thiết kế UI tiện lợi, hiện đại và dễ tùy biến.
+- **Prisma ORM** – Quản lý và thao tác cơ sở dữ liệu hiệu quả.
+- **Firebase Authentication** – Đăng ký/Đăng nhập với Google và Email/Password.
+- **Stripe/Thanh toán online** – Hỗ trợ thanh toán trực tuyến.
+- **React Toastify & Sonner** – Hiển thị thông báo trực quan.
+- **Swiper** – Hiệu ứng carousel/trình chiếu sản phẩm.
+
+## ✨ Tính năng nổi bật
+
+- 👤 **Đăng ký / Đăng nhập** bằng Firebase Authentication.
+- 🛍️ **Xem danh sách sản phẩm** theo danh mục hoặc theo gợi ý của Admin.
+- 🔍 **Bộ lọc thông minh**: tìm kiếm sản phẩm theo giá, khuyến mãi, danh mục.
+- ➕ **Thêm vào giỏ hàng**, cập nhật số lượng.
+- 💳 **Thanh toán online** (tích hợp cổng thanh toán).
+- 📱 **Responsive**: giao diện tối ưu cho cả desktop và mobile.
+- ⚡ **Tối ưu SEO** và tốc độ tải trang với Next.js.
+
+## 📦 Cài đặt & Chạy dự án
+
+Clone project:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/DungDuyTran/web-ban-hang.git
+cd web-ban-hang
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
