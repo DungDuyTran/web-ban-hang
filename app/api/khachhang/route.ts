@@ -1,8 +1,9 @@
 import { prisma } from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
-import { error } from "console";
+import Redis from "ioredis";
 import { NextRequest, NextResponse } from "next/server";
 import z, { json } from "zod";
+
+const redis = new Redis();
 
 const KhachHangSchema = z.object({
   hoTen: z.string().max(255),
@@ -15,8 +16,15 @@ const KhachHangArraySchema = z.array(KhachHangSchema);
 
 export async function GET(req: NextRequest) {
   try {
+    const cache = await redis.get("khachhang:list");
+    if (cache) {
+      const data = JSON.parse(cache);
+      return NextResponse.json({ data, cache: true }, { status: 200 });
+    }
     const data = await prisma.khachHang.findMany();
-    return NextResponse.json({ data }, { status: 200 });
+    await redis.set("khachhang:list", JSON.stringify(data), "EX", 600);
+
+    return NextResponse.json({ data, cache: false }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 400 });
   }
@@ -37,6 +45,7 @@ export async function POST(req: NextRequest) {
         sdt: succesfull.data.sdt,
       },
     });
+    await redis.del("khachhang:list");
     return NextResponse.json({ newKhachHang }, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 400 });

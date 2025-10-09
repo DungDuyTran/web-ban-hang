@@ -27,7 +27,8 @@ export default function ProductPage() {
 
         setProducts(mapped);
       } catch (error) {
-        console.error("Lỗi khi load sản phẩm:", error);
+        return;
+        // console.error("Lỗi khi load sản phẩm:", error);
       } finally {
         setLoading(false);
       }

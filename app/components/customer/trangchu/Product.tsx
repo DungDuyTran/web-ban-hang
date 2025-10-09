@@ -9,7 +9,7 @@ export default function ProductCus() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // lọc
+  // Bộ lọc
   const [filters, setFilter] = useState({
     danhMuc: "",
     thuongHieu: "",
@@ -23,12 +23,18 @@ export default function ProductCus() {
         const res = await fetch("/api/sanpham");
         const data = await res.json();
 
-        const mapped = data.map((p: any) => ({
+        console.log("Kết quả API /api/sanpham:", data);
+
+        // Nếu API trả về { data: [...] } thì lấy data.data, còn nếu trả về [] thì lấy trực tiếp
+        const list = Array.isArray(data) ? data : data.data || [];
+
+        const mapped = list.map((p: any) => ({
           ...p,
           giaGoc: Number(p.giaGoc),
           giaKhuyenMai: p.giaKhuyenMai ? Number(p.giaKhuyenMai) : undefined,
           hinhAnhUrl: p.HinhAnh?.hinhAnh || "/no-image.png",
         }));
+
         setProducts(mapped);
       } catch (error) {
         console.error("Lỗi khi load sản phẩm:", error);
@@ -36,22 +42,24 @@ export default function ProductCus() {
         setLoading(false);
       }
     };
+
     fetchProducts();
   }, []);
 
   if (loading) return <p className="text-black">Đang loading sản phẩm...</p>;
 
-  // danh sách lọc
+  // Danh sách lọc
   const danhMucList = [
     ...new Set(products.map((sp) => sp.DanhMuc?.tenDanhMuc).filter(Boolean)),
   ] as string[];
+
   const thuongHieuList = [
     ...new Set(
       products.map((sp) => sp.ThuongHieu?.tenThuongHieu).filter(Boolean)
     ),
   ] as string[];
 
-  // áp dụng bộ lọc
+  // Áp dụng bộ lọc
   const filteredProduct = products.filter((sp) => {
     const matchDanhMuc =
       !filters.danhMuc || sp.DanhMuc?.tenDanhMuc === filters.danhMuc;
@@ -62,10 +70,11 @@ export default function ProductCus() {
     const min = filters.minPrice ? Number(filters.minPrice) : null;
     const max = filters.maxPrice ? Number(filters.maxPrice) : null;
 
-    const giaThucTe = sp.giaKhuyenMai ?? sp.giaGoc; // nếu có khuyến mãi thì dùng khuyến mãi
+    const giaThucTe = sp.giaKhuyenMai ?? sp.giaGoc; // nếu có khuyến mãi thì dùng giá khuyến mãi
 
     const matchMin = min === null || giaThucTe >= min;
     const matchMax = max === null || giaThucTe <= max;
+
     return matchDanhMuc && matchThuongHieu && matchMin && matchMax;
   });
 
@@ -110,6 +119,7 @@ export default function ProductCus() {
           ))}
         </select>
 
+        {/* Giá từ */}
         <input
           type="number"
           placeholder="Giá từ"
@@ -117,6 +127,8 @@ export default function ProductCus() {
           onChange={(e) => setFilter({ ...filters, minPrice: e.target.value })}
           className="border p-2 rounded w-24"
         />
+
+        {/* Giá đến */}
         <input
           type="number"
           placeholder="Giá đến"
@@ -124,6 +136,8 @@ export default function ProductCus() {
           onChange={(e) => setFilter({ ...filters, maxPrice: e.target.value })}
           className="border p-2 rounded w-24"
         />
+
+        {/* Nút reset */}
         <button onClick={resetFilters} className="px-3 py-2 border rounded">
           Reset
         </button>

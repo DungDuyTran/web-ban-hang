@@ -1,8 +1,10 @@
 import { prisma } from "@/lib/prisma";
-import { error } from "console";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
+import Redis from "ioredis";
+
+const redis = new Redis();
 const SanPhamSchema = z.object({
   tenSanPham: z.string(),
   moTa: z.string(),
@@ -17,6 +19,14 @@ const SanPhamSchema = z.object({
 
 export async function GET(req: NextRequest) {
   try {
+    // 1 kiểm tra cache Redis trước
+    const cache = await redis.get("sampham:list");
+    if (cache) {
+      console.log("Dữ liệu lấy từ Redis Cache");
+      const data = JSON.stringify(cache);
+      return NextResponse.json({ data, cache: true }, { status: 200 });
+    }
+    // 2. Nếu không có thì lấy trong db
     const data = await prisma.sanPham.findMany({
       include: {
         DanhMuc: true,
@@ -24,7 +34,9 @@ export async function GET(req: NextRequest) {
         HinhAnh: true,
       },
     });
-    return NextResponse.json(data, { status: 200 });
+    //3. Lưu và redis
+    await redis.set("sanpham:list", JSON.stringify(data));
+    return NextResponse.json({ data, cache: false }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 400 });
   }
@@ -49,6 +61,8 @@ export async function POST(req: NextRequest) {
         HinhAnhId: successfull.data.hinhAnhId,
       },
     });
+    // xóa cache cũ sau khi thêm mới
+    await redis.del("sanpham:list");
     return NextResponse.json({ newSanPham }, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 400 });
