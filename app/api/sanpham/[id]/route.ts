@@ -3,6 +3,7 @@ import { error } from "console";
 import { NextRequest, NextResponse } from "next/server";
 import { number, z } from "zod";
 import { data } from "react-router-dom";
+import redis from "@/lib/redis";
 
 const SanPhamSchema = z.object({
   tenSanPham: z.string(),
@@ -21,7 +22,15 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   const { id } = params;
+  const cachekey = `sanpham:${id}`;
   try {
+    const cache = await redis.get(cachekey);
+    if (cache) {
+      return NextResponse.json(
+        { data: JSON.stringify(cache), cache: true },
+        { status: 200 }
+      );
+    }
     const data = await prisma.sanPham.findUnique({
       where: {
         id: Number(id),
@@ -33,6 +42,9 @@ export async function GET(
         { status: 400 }
       );
     }
+    await redis.set(cachekey, JSON.stringify(data), "EX", 600);
+    const list = await prisma.sanPham.findMany();
+    await redis.set("khachhang:list", JSON.stringify(list), "EX", 600);
     return NextResponse.json({ data }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 400 });

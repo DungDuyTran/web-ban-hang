@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import Redis from "ioredis";
 import { NextRequest, NextResponse } from "next/server";
-import z, { json } from "zod";
+import z from "zod";
 
 const redis = new Redis();
 
@@ -12,14 +12,16 @@ const KhachHangSchema = z.object({
   sdt: z.string(),
 });
 
-const KhachHangArraySchema = z.array(KhachHangSchema);
+// const KhachHangArraySchema = z.array(KhachHangSchema);
 
 export async function GET(req: NextRequest) {
   try {
     const cache = await redis.get("khachhang:list");
     if (cache) {
-      const data = JSON.parse(cache);
-      return NextResponse.json({ data, cache: true }, { status: 200 });
+      return NextResponse.json(
+        { data: JSON.parse(cache), cache: "list" },
+        { status: 200 }
+      );
     }
     const data = await prisma.khachHang.findMany();
     await redis.set("khachhang:list", JSON.stringify(data), "EX", 600);

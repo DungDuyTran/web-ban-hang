@@ -2,9 +2,8 @@ import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
-import Redis from "ioredis";
+import redis from "@/lib/redis";
 
-const redis = new Redis();
 const SanPhamSchema = z.object({
   tenSanPham: z.string(),
   moTa: z.string(),

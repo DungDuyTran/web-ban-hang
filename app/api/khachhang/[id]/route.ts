@@ -7,6 +7,7 @@ import { data } from "react-router-dom";
 import { Id } from "react-toastify";
 import z, { json } from "zod";
 import { id } from "zod/locales";
+import redis from "@/lib/redis";
 
 const KhachHangSchema = z.object({
   hoTen: z.string().max(255),
@@ -20,7 +21,16 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   const { id } = params;
+  const cachekey = `khachhang:${id}`;
   try {
+    const cache = await redis.get(cachekey);
+
+    if (cache) {
+      return NextResponse.json(
+        { data: JSON.parse(cache), cache: true },
+        { status: 200 }
+      );
+    }
     const data = await prisma.khachHang.findUnique({
       where: {
         id: Number(id),
@@ -32,7 +42,11 @@ export async function GET(
         { status: 400 }
       );
     }
-    return NextResponse.json({ data }, { status: 200 });
+    await redis.set(cachekey, JSON.stringify(data), "EX", 600);
+    // đồng thời cập nhật cache list nếu cóoo
+    const list = await prisma.khachHang.findMany();
+    await redis.set("khachhang:list", JSON.stringify(list), "EX", 600);
+    return NextResponse.json({ data, cache: false }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 400 });
   }
@@ -60,6 +74,8 @@ export async function PUT(
         sdt: successfull.data.sdt,
       },
     });
+    await redis.del(`khachhang:${id}`);
+    await redis.del(`khachhang:list`);
     return NextResponse.json({ message: "update thành công" }, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 400 });
@@ -76,6 +92,8 @@ export async function DELETE(
         id: Number(id),
       },
     });
+    await redis.del(`khachhang:${id}`);
+    await redis.del(`khachhang:list`);
     return NextResponse.json({ massage: "xóa id thành công" }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 400 });
